@@ -1,0 +1,150 @@
+<html>
+<head>
+<style>
+#div1 {
+  width: 350px;
+  height: 70px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+
+.main-div{
+            display: flex;
+            justify-content: space-between;
+            width: 80vw;
+            height: 5vh;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0px 20px;
+            border: 1px solid black;
+        }
+        .main-div div{
+            width: 6vw;
+            display: flex;
+            justify-content: center;
+        }
+        .main-div div:hover{
+            background-color: yellow;
+            color: red;
+        }
+        table{
+            border-collapse: collapse;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+         th{
+            border: 1px solid black;
+            padding: 10;
+            width: 40vw;
+            text-align: left;
+            background-color: rgb(64, 205, 64);
+        }
+        td{
+            border: 1px solid black;
+            padding: 10;
+            width: 40vw;
+            text-align: left;
+        }
+        button{
+            margin-top: 20px;
+        }
+</style>
+<script>
+
+let arrfrt=["Apple","Banana","orange","papaya"]
+let arrvege=["Patato","chilli"]
+let frtarr=[]
+let vegarr=[]
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+//   let val=document.querySelectorAll('[class="frut1"] [alt="fr"]');
+//   console.log(val)
+//   console.log(data);
+}
+
+let btn=document.getElementById('btn-sub');
+
+
+
+function myfunbtn(){
+  let val=document.querySelectorAll('[class="frut1"] [alt="fr"]');
+  let veg=document.querySelectorAll('[class="vege1"] [alt="ve"]')
+  for(let item of val)
+  {
+      frtarr.push(item.textContent.trim());
+      console.log(arrfrt.includes(item.textContent.trim()));
+      
+  }
+  for(let item of veg){
+      vegarr.push(item.textContent.trim());
+      console.log(arrvege.includes(item.textContent.trim()));
+  }
+
+console.log(frtarr);
+console.log(vegarr);
+console.log(frtarr.length);
+console.log(vegarr.length);
+let add=frtarr.length+vegarr.length
+console.log('right is ',add);
+if(add!=null){
+let para=document.getElementById('para').innerHTML=`<p>Right is : ${add}</p>`
+}
+
+}
+</script>
+</head>
+<body>
+
+<br>
+
+<div class="main-div">
+    <div id="apple" alt="fr" draggable="true" ondragstart="drag(event)">Apple</div>
+    <div id="banana" alt="fr" draggable="true" ondragstart="drag(event)">Banana</div>
+    <div id="patato" alt="ve" draggable="true" ondragstart="drag(event)">Patato</div>
+    <div id="chilli" alt="ve" draggable="true" ondragstart="drag(event)">chilli</div>
+    <div id="orange" alt="fr" draggable="true" ondragstart="drag(event)">orange</div>
+    <div id="papaya" alt="fr" draggable="true" ondragstart="drag(event)">papaya</div>
+ </div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Fruit</th>
+            <th>Vegetable</th>
+        </tr>
+    </thead>
+    <tbody id="tableData" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+         <tr>
+             <td class="frut1"></td>
+             <td class="vege1"></td>
+         </tr>
+         <tr>
+             <td class="frut1"></td>
+             <td class="vege1"></td>
+         </tr>
+         <tr>
+             <td class="frut1"></td>
+             <td class="vege1"></td>
+         </tr>
+         <tr>
+             <td class="frut1"></td>
+             <td class="vege1"></td>
+         </tr>
+    </tbody>
+</table>
+<button id="btn-sub" onclick="myfunbtn()">submit</button>
+<p id="para">Right is : </p>
+</body>
+</html>
